@@ -22,4 +22,4 @@ class RecommendationService(RecommendationServiceServicer):
         for id, score in zip(recs, scores):
             res.items.append(prs.RecommendedItem(id=id, score=score))
 
-        return req
+        return res

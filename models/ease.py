@@ -90,7 +90,7 @@ class EASE(Model):
         delta = time.perf_counter() - start_t
         logging.info("Generated %d recommendations in %fms", len(scores), round(delta * 1000, 2))
 
-        return top_items.tolist(), top_scores.tolist() / np.max(top_scores)
+        return top_items.tolist(), (top_scores / (np.max(top_scores)+1e-6)).tolist()
 
 
     def save(self, folder_path: str):
