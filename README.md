@@ -6,8 +6,9 @@ Containerized implementation of [EASE](https://arxiv.org/abs/1905.03375) served 
 WIP
 
 Environment variables:
--
--
+- HOST
+- NUM_WORKERS
+- PERSIST_PATH
 
 ## Compoling the protocol
 
