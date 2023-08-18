@@ -1,9 +1,0 @@
-{
-    "python.linting.enabled": false,
-    "python.linting.pylintEnabled": true,
-    "python.linting.pycodestyleEnabled": false,
-    "editor.rulers": [
-        80,
-        { "column": 100, "color": "#ff6666"},
-    ]
-}
