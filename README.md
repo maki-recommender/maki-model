@@ -10,7 +10,7 @@ Environment variables:
 - NUM_WORKERS
 - PERSIST_PATH
 
-## Compoling the protocol
+## Compiling the protocol
 
 This section can be skipped unless some changes to the proto files need to be implemented in the application.
 

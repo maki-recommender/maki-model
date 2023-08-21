@@ -74,13 +74,12 @@ class EASE(Model):
 
         scores = np.squeeze(seen_items * self.b)
             
-        # keep only unseen
-        scores = scores[seen_items == 0]
+        scores[seen_items != 0] = -np.inf
 
         if at == -1 or at == 0:
-            at = len(scores)
+            at = len(scores) - len(seen_items)
         else:
-            at = min(at, len(scores)) # crop at valid items
+            at = min(at, len(scores)- len(seen_items)) # crop at valid items
 
 
         top_items = np.flip(np.argsort(scores)[-at:])
