@@ -33,3 +33,7 @@ class Model:
     def load(self, folder_path: str):
         """Load model from disk"""
         raise NotImplementedError
+    
+    def train_implicit(self, user_ids, anime_ids):
+        """Train model using inplicit recommendations with 1 as score"""
+        raise NotImplementedError

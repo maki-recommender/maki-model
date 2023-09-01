@@ -95,7 +95,12 @@ class EASE(Model):
     def save(self, folder_path: str):
         """Save current model to disk"""
         os.makedirs(folder_path, exist_ok=True)
-        sps.save_npz(os.path.join(folder_path, "ease_b.npz"), self.b)
+        # save to a temporaty file, in case of failure either this new file or the
+        # older ones are briked
+        temp_fpath = os.path.join(folder_path, "ease_b_temp.npz")
+        fpath = os.path.join(folder_path, "ease_b.npz")
+        sps.save_npz(temp_fpath, self.b)
+        os.renames(temp_fpath, fpath)
         logging.info("Model saved to disk")
 
 
@@ -122,3 +127,8 @@ class EASE(Model):
                 shape=shape
             )
         return coo
+    
+    def train_implicit(self, user_ids, anime_ids):
+        scores = [1] * len(user_ids)
+        urm = EASE.make_coo(user_ids, anime_ids, scores)
+        self.fit(urm)
