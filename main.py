@@ -48,23 +48,23 @@ if is_trainer:
 
 
     # create services
-    recommemnd_service = RecommendationService(anime_model)
+    recommend_service = RecommendationService(anime_model)
 
 
     logging.info("Starting grpc server...")
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=NUM_WORKERS))
 
     #add services to the server
-    add_RecommendationServiceServicer_to_server(recommemnd_service, server)
+    add_RecommendationServiceServicer_to_server(recommend_service, server)
 
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port(HOST)
     server.start()
     logging.info("gRPC server running at: %s", HOST)
 
     # watch for parameter changes
     model_path = os.path.join(PERSIST_PATH, "ease_b.npz")
     file_stamp = os.stat(model_path).st_mtime
-    logging.info("Watching for paramters changes...")
+    logging.info("Watching for parameters changes...")
     while True:
         stamp = os.stat(model_path).st_mtime
         if stamp != file_stamp:
@@ -73,7 +73,7 @@ if is_trainer:
             temp = EASE()
             temp.load(PERSIST_PATH)
             # swap model, assignment should be atomic in python 
-            recommemnd_service._anime_model = temp
+            recommend_service._anime_model = temp
 
         time.sleep(5)
     
@@ -100,5 +100,5 @@ else:
             gc.collect()
         
         except Exception as e:
-            logging.error(f"Model retrain failer: {e}", stack_info=True)
+            logging.error(f"Model retrain failed: {e}", stack_info=True)
     

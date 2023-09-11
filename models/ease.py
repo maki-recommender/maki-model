@@ -10,7 +10,7 @@ from . import Model
 
 class EASE(Model):
     """
-    EASE implemantation with parameter threshold to reduce used space at cost of a bit of performance
+    EASE implementation with parameter threshold to reduce used space at cost of a bit of performance
     
     User ids and item ids are assumed to be compact and without any missing values between them
     """
@@ -39,7 +39,7 @@ class EASE(Model):
             B = P / -np.diag(P)
             B[diag] = 0
 
-            # compress data as much as possibile for performance and memory usage
+            # compress data as much as possible for performance and memory usage
             B = sps.coo_matrix(B)
 
             under = np.logical_or(B.data <= -threshold, B.data >= threshold)

@@ -35,5 +35,5 @@ class Model:
         raise NotImplementedError
     
     def train_implicit(self, user_ids, anime_ids):
-        """Train model using inplicit recommendations with 1 as score"""
+        """Train model using implicit recommendations with 1 as score"""
         raise NotImplementedError
