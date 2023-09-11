@@ -18,9 +18,9 @@ Variables without a default value must be assigned.
 
 `MAKI_IsRetrainer`
 
-**Description:** Set to true to 
+**Description:** Set to true to enable retrain mode.
 
-**Default:** 
+**Default:** false
 
 `MAKI_PersistentPath`
 
