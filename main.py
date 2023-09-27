@@ -10,7 +10,7 @@ import time
 import grpc
 
 from utils import env_var
-from models import EASE
+from models import EASE, DummyModel
 from recommendations import RecommendationService
 from proto.recommend_service_pb2_grpc import add_RecommendationServiceServicer_to_server
 
@@ -40,11 +40,12 @@ print(f"|{'(c) 2023 rickycorte'.center(51)}|")
 print(f"|{('Trainer Mode: '+ str(is_trainer)).center(51)}|")
 print("└───────────────────────────────────────────────────┘")
 
-if is_trainer: 
+if not is_trainer: 
     try:
         anime_model.load(PERSIST_PATH)
     except Exception as e:
-        logging.error("No model could be loaded!")
+        logging.error("No model could be loaded! Using dummy model!")
+        anime_model = DummyModel()
 
 
     # create services
