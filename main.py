@@ -64,10 +64,17 @@ if not is_trainer:
 
     # watch for parameter changes
     model_path = os.path.join(PERSIST_PATH, "ease_b.npz")
-    file_stamp = os.stat(model_path).st_mtime
+    if os.path.exists(model_path):
+        file_stamp = os.stat(model_path).st_mtime
+    else:
+        file_stamp = -1
     logging.info("Watching for parameters changes...")
     while True:
-        stamp = os.stat(model_path).st_mtime
+        if os.path.exists(model_path):
+            stamp = os.stat(model_path).st_mtime
+        else:
+            stamp = -1
+
         if stamp != file_stamp:
             file_stamp = stamp
             logging.info("Detected model change")
