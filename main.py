@@ -30,9 +30,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-t', '--trainer', default="false")
 
 args = parser.parse_args()
-is_trainer = bool(args.trainer)
+is_trainer = args.trainer.lower() == "true"
 
-is_trainer |= env_var("MAKI_IsRetrainer", "") != ""
+is_trainer |= env_var("MAKI_IsRetrainer", "false").lower() == "true"
 
 print("┌───────────────────────────────────────────────────┐")
 print(f"|{'Maki v2.0.0'.center(51)}|")
